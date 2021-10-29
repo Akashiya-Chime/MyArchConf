@@ -1,5 +1,0 @@
-#!/usr/bin/expect -f
-spawn ssh administrator@39.103.143.78
-expect "password:"
-send "nekoSTU.top\r"
-interact
