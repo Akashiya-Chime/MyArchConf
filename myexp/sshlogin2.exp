@@ -1,0 +1,8 @@
+#!/usr/bin/expect -f
+
+set ip [lindex $argv 0]
+
+spawn ssh android@$ip
+expect "password:"
+send "19760318Kun\r"
+interact
