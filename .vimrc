@@ -4,54 +4,42 @@ set cursorline
 set wrap
 set showcmd
 set wildmenu
-
 set hlsearch
 exec "nohlsearch"
 set incsearch
 set ignorecase
 set smartcase
-
 set autoindent
 set smartindent
-
 set tabstop=4
 set shiftwidth=4
 set expandtab
 set smarttab
 set softtabstop=2
-
 set mouse=a
 set ruler
 set encoding=UTF-8
-
-"启动显示状态行
 set laststatus=2
 
+let mapleader=" "
 map R :source $MYVIMRC<CR>
 nmap <leader>w :w<CR>
 nmap <leader>q :q<CR>
 
 noremap J 5j
 noremap K 5k
-nnoremap <C-n> :NERDTree<CR>
-nnoremap tt :CocCommand explorer<CR>
 nnoremap H ^
 nnoremap L $
-nnoremap <C-r> :GoRun<CR>
+noremap <leader><CR> :nohlsearch<CR>
 
-
-" indentLine
-let g:indentLine_char='┆'
-let g:indentLine_enabled = 1
-
-" YouCompleteMe
-" set completeopt=longest,menu
-
+" ===
+" === vim-plug
+" ===
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'connorholyday/vim-snazzy'
-" Plug 'ycm-core/YouCompleteMe'
 Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -65,6 +53,17 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 call plug#end()
+
+" ===
+" === vim-go
+" ===
+nnoremap <C-o> :GoRun<CR>
+
+" ===
+" === indentLine
+" ===
+let g:indentLine_char='┆'
+let g:indentLine_enabled = 1
 
 " ===
 " === nerdtree-git-plugin
@@ -132,6 +131,7 @@ let g:webdevicons_enable_airline_statusline = 1
 " ===
 " === nerdtree
 " ===
+nnoremap <C-n> :NERDTree<CR>
 "Show hide file.
 let g:NERDTreeHidden=0
 "Delete help information at the top
@@ -140,7 +140,6 @@ let NERDTreeMinimalUI=1
 " ===
 " === vim-airline
 " ===
-
 set laststatus=2  " 永远显示状态栏
 let g:airline_powerline_fonts = 1  " 支持 powerline 字体
 let g:airline#extensions#tabline#enabled = 1 " 显示窗口tab和buffer
@@ -192,11 +191,12 @@ let g:NERDToggleCheckAllLines = 1
 " === dracula
 " ===
 color dracula
-" let g:SnazzyTransparent = 1
 
 " ===
 " === coc.nvim
 " ===
+nnoremap tt :CocCommand explorer<CR>
+
 let g:coc_global_extensions = ['coc-json', 'coc-vimlsp', 'coc-go']
 
 set encoding=utf-8
