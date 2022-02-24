@@ -1,7 +1,15 @@
+"    _    _             _     _             
+"   / \  | | ____ _ ___| |__ (_)_   _  __ _ 
+"  / _ \ | |/ / _` / __| '_ \| | | | |/ _` |
+" / ___ \|   < (_| \__ \ | | | | |_| | (_| |
+"/_/   \_\_|\_\__,_|___/_| |_|_|\__, |\__,_|
+"                               |___/       
+
 syntax on
 set number
 set cursorline
 set wrap
+
 set showcmd
 set wildmenu
 set hlsearch
@@ -20,17 +28,47 @@ set mouse=a
 set ruler
 set encoding=UTF-8
 set laststatus=2
+set relativenumber
+set nocompatible
+set clipboard=unnamedplus
+set termencoding=utf-8
+set encoding=utf-8
+set clipboard=unnamed
+set scrolloff=5
+" this fix the visual-multi's problem
+set term=xterm-256color
 
 let mapleader=" "
 map R :source $MYVIMRC<CR>
-nmap <leader>w :w<CR>
-nmap <leader>q :q<CR>
+nmap S :w<CR>
+nmap Q :q<CR>
+nmap Y :set relativenumber<CR>
+nmap U :set norelativenumber<CR>
 
-noremap J 5j
-noremap K 5k
+" no use on wt, but work on alacritty
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+vnoremap Y "+y
+
+noremap J 10j
+noremap K 10k
 nnoremap H ^
 nnoremap L $
+nnoremap = n
+nnoremap - N
 noremap <leader><CR> :nohlsearch<CR>
+noremap <leader>y :<C-u>CocList -A --normal yank<CR>
+noremap <C-g> :term<CR>
+" edit .vimrc
+noremap <leader>rc :e $HOME/.vimrc<CR>
+" spell check
+map <leader>sc :set spell!<CR>
+" figlet
+map tx :r !figlet 
+" no highlight search
+noremap <leader>h :nohlsearch<CR>
 
 " ===
 " === vim-plug
@@ -44,6 +82,7 @@ Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'theniceboy/nvim-deus'
 Plug 'Yggdroot/indentLine'
 Plug 'mhinz/vim-startify'
 Plug 'jiangmiao/auto-pairs'
@@ -51,14 +90,22 @@ Plug 'preservim/nerdcommenter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 call plug#end()
 
 " ===
+" === vim-visual-multi
+" ===
+let g:VM_maps = {}
+let g:VM_maps['Add Cursor Down'] = '<C-j>'
+let g:VM_maps['Add Cursor Up'] = '<C-k>'
+
+" ===
 " === vim-go
 " ===
-nnoremap <C-o> :GoRun<CR>
-
+nnoremap <C-s> :GoRun<CR>
+ 
 " ===
 " === indentLine
 " ===
@@ -71,7 +118,6 @@ let g:indentLine_enabled = 1
 let g:NERDTreeGitStatusUseNerdFonts = 1
 let g:NERDTreeGitStatusShowIgnored = 1
 let g:NERDTreeGitStatusIndicatorMapCustom = {
-    \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
     \ "Renamed"   : "➜",
@@ -79,6 +125,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Deleted"   : "✖",
     \ "Dirty"     : "✗",
     \ "Clean"     : "✔︎",
+    \ "Modified"  : "✹",
     \ 'Ignored'   : '☒',
     \ "Unknown"   : "?"
     \ }
@@ -131,7 +178,7 @@ let g:webdevicons_enable_airline_statusline = 1
 " ===
 " === nerdtree
 " ===
-nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-m> :NERDTree<CR>
 "Show hide file.
 let g:NERDTreeHidden=0
 "Delete help information at the top
@@ -144,14 +191,6 @@ set laststatus=2  " 永远显示状态栏
 let g:airline_powerline_fonts = 1  " 支持 powerline 字体
 let g:airline#extensions#tabline#enabled = 1 " 显示窗口tab和buffer
 let g:airline_theme='dracula'
-if !exists('g:airline_symbols')
-let g:airline_symbols = {}
-endif
-let g:airline_left_sep = '▶'
-let g:airline_left_alt_sep = '❯'
-let g:airline_right_sep = '◀'
-let g:airline_right_alt_sep = '❮'
-let g:airline_symbols.linenr = '¶'
 
 " ===
 " === nerdcommenter
@@ -190,14 +229,16 @@ let g:NERDToggleCheckAllLines = 1
 " ===
 " === dracula
 " ===
+let g:dracula_colorterm = 0  " 透明背景，必须在设置主题前配置
 color dracula
+" color deus
 
 " ===
 " === coc.nvim
 " ===
 nnoremap tt :CocCommand explorer<CR>
 
-let g:coc_global_extensions = ['coc-json', 'coc-vimlsp', 'coc-go']
+let g:coc_global_extensions = ['coc-json', 'coc-vimlsp', 'coc-go', 'coc-yank']
 
 set encoding=utf-8
 set updatetime=100
