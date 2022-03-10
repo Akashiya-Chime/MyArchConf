@@ -45,7 +45,6 @@ alias token='xclip -i ~/forVSCode/MyBlog/token.txt'
 alias s='neofetch'
 
 export SERVER="administrator@39.103.143.78"
-export token="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"
 
 # ===
 # === Rust
