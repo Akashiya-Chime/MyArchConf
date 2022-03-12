@@ -31,7 +31,6 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 alias ra='ranger'
 alias ser='expect ~/myexp/sshlogin.exp'
 alias serf='expect ~/myexp/scpfile.exp'
-alias ser2='expect ~/myexp/sshlogin2.exp'
 alias ref='sudo reflector --verbose --country China --latest 15 --sort rate --save /etc/pacman.d/mirrorlist'
 alias redis-manager='/home/akashiyachime/Downloads/AppImage/Another-Redis-Desktop-Manager.1.4.9.AppImage'
 alias apifox='/home/akashiyachime/Downloads/AppImage/Apifox.AppImage'
