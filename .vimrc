@@ -37,6 +37,7 @@ set clipboard=unnamed
 set scrolloff=5
 " this fix the visual-multi's problem
 set term=xterm-256color
+set scl=yes
 
 let mapleader=" "
 map R :source $MYVIMRC<CR>
@@ -69,6 +70,9 @@ map <leader>sc :set spell!<CR>
 map tx :r !figlet 
 " no highlight search
 noremap <leader>h :nohlsearch<CR>
+" cursor location
+noremap < <C-o>
+noremap > <C-i>
 
 " ===
 " === vim-plug
@@ -94,8 +98,11 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'junegunn/fzfi.vim'
+Plug 'morhetz/gruvbox'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
+
 
 " ===
 " === FZF
@@ -125,6 +132,7 @@ let g:VM_maps['Add Cursor Up'] = '<C-k>'
 " === vim-go
 " ===
 nnoremap <C-s> :GoRun<CR>
+nnoremap <C-c> :term cargo run<CR>
  
 " ===
 " === indentLine
@@ -246,6 +254,15 @@ let g:NERDTrimTrailingWhitespace = 1
 " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDToggleCheckAllLines = 1
 
+
+" ===
+" === gruvbox
+" ===
+" color gruvbox
+let g:gruvbox_underline = 1
+let g:gruvbox_bold = 1
+
+
 " ===
 " === dracula
 " ===
@@ -267,7 +284,8 @@ set shortmess+=c
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-nmap <silent> <F12> <Plug>(coc-definition)
+" nmap <silent> <F12> <Plug>(coc-definition)
+nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -277,11 +295,6 @@ nmap <leader>f  <Plug>(coc-format-selected)
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
