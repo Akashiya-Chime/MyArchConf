@@ -218,7 +218,9 @@ let NERDTreeMinimalUI=1
 set laststatus=2  " 永远显示状态栏
 let g:airline_powerline_fonts = 1  " 支持 powerline 字体
 let g:airline#extensions#tabline#enabled = 1 " 显示窗口tab和buffer
-let g:airline_theme='dracula'
+" let g:airline_theme='dracula'
+let g:airline_theme='molokai'
+" let g:airline_theme='base16'
 
 " ===
 " === nerdcommenter
@@ -258,16 +260,20 @@ let g:NERDToggleCheckAllLines = 1
 " ===
 " === gruvbox
 " ===
-" color gruvbox
+color gruvbox
 let g:gruvbox_underline = 1
 let g:gruvbox_bold = 1
+set bg=dark
+let g:gruvbox_transparent_bg = 1
+autocmd VimEnter * hi Normal ctermbg=none
+set termguicolors
 
 
 " ===
 " === dracula
 " ===
 let g:dracula_colorterm = 0  " 透明背景，必须在设置主题前配置
-color dracula
+" color dracula
 " color deus
 
 " ===
